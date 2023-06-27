@@ -10,6 +10,8 @@ Laravel | Project Index
     Tutti i projects
 </h1>
 
+<a class="btn btn-primary my-3" href="{{ route('admin.projects.create') }}">Create Project</a>
+
 <div class="table-responsive">
 
     <table class="table table-primary">
@@ -23,6 +25,9 @@ Laravel | Project Index
                 </th>
                 <th scope="col">
                     slug
+                </th>
+                <th scope="col">
+                    actions
                 </th>
             </tr>
         </thead>
@@ -40,6 +45,9 @@ Laravel | Project Index
                 </td>
                 <td>
                     {{ $elem->slug }}
+                </td>
+                <td>
+                    <a href="{{ route('admin.projects.show', $elem) }}">Show</a>
                 </td>
             </tr>
 
