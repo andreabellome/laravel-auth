@@ -10,6 +10,12 @@ Laravel | Project Index
     Tutti i projects
 </h1>
 
+@if(Session::has('success'))
+    <div class="alert alert-success">
+        {!! Session::get('success') !!}
+    </div>
+@endif
+
 <a class="btn btn-primary my-3" href="{{ route('admin.projects.create') }}">Create Project</a>
 
 <div class="table-responsive">
@@ -48,6 +54,7 @@ Laravel | Project Index
                 </td>
                 <td>
                     <a href="{{ route('admin.projects.show', $elem) }}">Show</a>
+                    <a href="{{ route('admin.projects.edit', $elem) }}">Edit</a>
                     <form action="{{ route('admin.projects.destroy', $elem) }}" method="POST">
                         @csrf
                         @method('DELETE')

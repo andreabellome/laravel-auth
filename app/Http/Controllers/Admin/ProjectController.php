@@ -89,9 +89,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -101,9 +101,29 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        /* validazione */
+        $request->validate(
+            [
+                'title' => 'required|max:255',
+            ],
+            [
+                'title.required' => 'Il titolo è obbligatorio',
+                'title.max' => 'Il titolo non deve superare 255 caratteri',
+            ]
+        );
+
+        $form_data = $request->all();
+
+        /* trasformazione dello slug */
+        $slug = Project::generateSlug( $request->title );
+        $form_data['slug'] = $slug;
+
+        $project->update($form_data);
+
+        return redirect()->route('admin.projects.index')->with('success', "Bravo hai modificato il project: $project->title");
+
     }
 
     /**
