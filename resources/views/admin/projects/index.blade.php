@@ -48,6 +48,13 @@ Laravel | Project Index
                 </td>
                 <td>
                     <a href="{{ route('admin.projects.show', $elem) }}">Show</a>
+                    <form action="{{ route('admin.projects.destroy', $elem) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+
+                        <button onclick="return confirm('Sei sicuro di voler eliminare il project?')" type="submit" class="btn btn-danger">X</button>
+
+                    </form>
                 </td>
             </tr>
 
